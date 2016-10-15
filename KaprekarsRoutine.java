@@ -3,7 +3,6 @@ public class KaprekarsRoutine {
 
 	//Write a function that, given a 4-digit number, 
 	//returns the largest digit in that number. 
-	//Numbers between 0 and 999 are counted as 4-digit numbers with leading 0's.
 	
 	public static void main(String[] args) {
 		
@@ -18,21 +17,20 @@ public class KaprekarsRoutine {
 	
 	public static int largest_digit(int x){
 		
-		String y = Integer.toString(x);
-		int firstNum = Character.digit(y.charAt(0), 10);
-		int biggestNum = firstNum;
+		String y = Integer.toString(x); //need to be able to search the 4 digit int, turning it into a string allows us to toChar spotcheck it
+		int biggestNum = Character.digit(y.charAt(0), 10); 
 		
-		if(y.charAt(0) == 9){
-			return 9;
+		if(biggestNum == 9){
+			return 9; //if the first digit is a 9, then we know that there cant be anything bigger than that, return 9
 		}
 		
 		else{
 						
-			for(int i = 0; i < y.length()-1; i++){	
+			for(int i = 0; i < y.length()-1; i++){ //runs 4 times, constant runtime
 				
-				if(y.charAt(i+1) > y.charAt(i)){			
+				if(Character.digit(y.charAt(i+1), 10) > biggestNum){ //since comparing chars compares their unicode value, comparing single digits as a part of a string works in this instance			
 					
-					biggestNum = Character.digit(y.charAt(i+1), 10);				
+					biggestNum = Character.digit(y.charAt(i+1), 10);	//if the next int is bigger than the current int, the next int becomes king of the hill			
 				}		
 			}
 		}
